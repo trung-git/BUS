@@ -307,7 +307,7 @@ $("#btn").click(event => {
 			password: password,
 			pb: pb
 		}
-		fetch(`http://localhost:3000/auth/register`, {
+		fetch(`/auth/register`, {
 				method: "POST",
 				body: JSON.stringify(data),
 				headers: {
