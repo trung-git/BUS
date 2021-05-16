@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BUS</title>
+<link rel="icon" href="icon.png">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link rel="stylesheet" href="/stylesheets/style.css">
+
+
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+<body>
+
+  <div>
+    <div class="sidenav">
+      <div>
+        <div>
+          <a class="itemleft" href="/auth/y">
+          <table>
+            <tr>
+                <td>
+                  <img class="avt-mini" src="<%= img %>" >
+                </td>
+                <td><%= name %></td>
+            </tr>
+          </table>
+        </a>
+        </div>
+        
+      
+        <div> 
+          <a class="itemleft" href="/post"><i class="fa fa-home" aria-hidden="true"></i> Trang Chủ </a>
+        </div>
+        <div>
+          <a class="itemleft" href="/noti/pb"><i class="fa fa-server" aria-hidden="true"></i> Phòng Ban </a>
+        </div>
+        <div>
+          <a class="itemleft" href="/post/sinhvien"><i class="fa fa-user" aria-hidden="true"></i> Sinh viên </a>
+        </div> 
+        
+        <div>
+          <a class="itemleft" href="/auth/logout"><i class="fa fa-sign-out" aria-hidden="true"></i> Đăng xuất </a>
+        </div> 
+
+
+    </div>
+  </div>
+
+  <div class="navbar">
+    <div class="homepage">
+      <b>THÔNG BÁO</b>
+    </div>
+  </div>
+    
+
+  <div class="main">
+    <div class="title-depart">Thông báo từ <span><%= pb %></span> </div>
+      <% for(let i = 0; i < noti.length; i++){ %>
+      <div class="newdepart" id="new<%= noti[i]._id %>">
+        
+
+        <div class="new-from-depart">
+          <% if(noti[i].userId === iduser.toString()){ %>
+          <td rowspan="2" class="delet">
+            <a class="noti-btn-edit" data-id1="<%= noti[i]._id %>" data-id2="<%= iduser %>" ><i class="fa fa-edit"></i></ac> &nbsp;&nbsp;
+            <a class="noti-btn-del" data-id1="<%= noti[i]._id %>" data-id2="<%= iduser %>"><i class="fa fa-trash-o"></i></a>
+        </td>
+        <% }; %>
+          <div class="titlenew-from-depart">
+            <p class="titlenew-depart" id="title<%= noti[i]._id %>"><%= noti[i].title %></p>
+          </div>
+          <div class="timenew-from-depart">
+            <p class="timenew-depart">- Đã đăng ngày <%= noti[i].createdAt.getDate() %>/<%= noti[i].createdAt.getMonth() + 1 %>/<%= noti[i].createdAt.getFullYear() %></p>
+          </div>
+          <div class="mainnew-from-depart">
+              <pre class="mainnew-depart" id="content<%= noti[i]._id %>"><%= noti[i].content %></pre>
+          </div>
+        </div>
+
+      </div>
+      <% }; %>
+
+  </div>
+  <div id="noti-id01" class="w3-modal">
+    <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
+
+      <div class="w3-center"><br>
+        <span onclick="document.getElementById('noti-id01').style.display='none'" class="w3-button w3-xlarge w3-hover-red w3-display-topright" title="Close Modal">&times;</span>
+        
+      </div>
+
+      <div class="w3-container">
+        	<h3><b>Chỉnh sửa thông báo</b></h3>
+          <textarea id="editnoti-title" name="Newpost" rows="4" cols="60"></textarea>
+          <textarea id="editnoti-content" name="Newpost" rows="50" cols="60"></textarea>
+          <button id="btn-save-noti" data-id1="xxx" data-id2="xxx" class="w3-button w3-block w3-green w3-section w3-padding" >Save</button>
+          
+        </div>
+      </div>
+
+      
+    </div>
+
+
+  </div>
+  <!-- <script>
+    $(".noti-btn-del").click(e=>{
+      e.preventDefault()
+      var r = confirm("Bạn có chắc muốn xóa post này?");
+      if (r == true) {
+        const notiId = e.currentTarget.dataset.id1
+        const userId = e.currentTarget.dataset.id2
+        const data = {
+          userId:userId
+        }
+        fetch(`/noti/del/${notiId}`, {
+            method: "DELETE",
+            body: JSON.stringify(data),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        })
+        .then(response => {
+            return response.json()
+        })
+        .then(result => {
+            if (result.code === 0) {
+                console.log(result);
+                $(`div#new${notiId}`).hide("slow", function() { $(this).remove(); })
+            } else {
+                throw Error("Remove Fail")
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        })
+
+      }
+    })
+    
+    $(".noti-btn-edit").click(e=>{
+      $("#noti-id01").show()
+      const notiId = e.currentTarget.dataset.id1
+      const userId = e.currentTarget.dataset.id2
+      let title = $(`#title${notiId}`).html()
+      let content = $(`#content${notiId}`).html()
+
+      $("textarea#editnoti-title").val(title)
+      $("textarea#editnoti-content").val(content)
+
+      $("#btn-save-noti").attr("data-id1",notiId)
+      $("#btn-save-noti").attr("data-id2",userId)
+    })
+    
+    $("#btn-save-noti").click(e=>{
+      const notiId = e.target.dataset.id1
+      const userId = e.target.dataset.id2
+      const title = $("textarea#editnoti-title").val()
+      const content = $("textarea#editnoti-content").val()
+      let data = {
+          userId,
+          title,content
+      }
+      fetch(`/noti/update/${notiId}`, {
+          method: "PUT",
+          body: JSON.stringify(data),
+          headers: {
+              "Content-type": "application/json; charset=UTF-8"
+          }
+      })
+      .then(response => {
+          return response.json()
+      })
+      .then(result => {
+          if (result.code === 0) {
+            $(`#title${notiId}`).html(title)
+            $(`#content${notiId}`).html(content)
+            $("#noti-id01").hide()
+              
+          } else {
+              throw Error("Remove Fail")
+          }
+      })
+      .catch(error => {
+          console.error('Error:', error);
+      }) 
+    })
+  
+  </script> -->
+  <script type="text/javascript" src="/javascripts/script.js"></script>
+</body>
+
+</html>

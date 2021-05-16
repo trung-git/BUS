@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BUS</title>
+<link rel="icon" href="https://f7.photo.talk.zdn.vn/3479841544823599640/2a92bfa52aabdff586ba.jpg">
+<link rel="stylesheet" href="/stylesheets/style.css">
+
+
+
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+<body>
+
+  <div>
+    <div class="sidenav">
+      <div>
+        <div>
+          <a class="itemleft" href="/auth/y">
+          <table>
+            <tr>
+                <td>
+                  <img class="avt-mini" src="<%= img %>" >
+                </td>
+                <td><%= name %></td>
+            </tr>
+          </table>
+        </a>
+        </div>
+        
+      
+        <div> 
+          <a class="itemleft" href="/post"><i class="fa fa-home" aria-hidden="true"></i> Trang Chủ </a>
+        </div>
+        <div>
+          <a class="itemleft" href="/noti/pb"><i class="fa fa-server" aria-hidden="true"></i> Phòng Ban </a>
+        </div>
+        <div>
+          <a class="itemleft" href="/post/sinhvien"><i class="fa fa-user" aria-hidden="true"></i> Sinh viên </a>
+        </div> 
+        
+        <div>
+          <a class="itemleft" href="/auth/logout"><i class="fa fa-sign-out" aria-hidden="true"></i> Đăng xuất </a>
+        </div> 
+
+
+    </div>
+  </div>
+
+  <div class="navbar">
+    <div class="homepage">
+      <b>THÔNG BÁO</b>
+    </div>
+
+   
+  </div>
+    
+
+  <div class="main">
+    <div class="title-depart">Danh sách các phòng ban</div>
+      <div class="depart-list">
+        <% for(let i = 0; i < ad.length; i++){ %>
+        <div class="department">
+          <a class="per-depart" href="/noti/show/<%= ad[i]._id %>">
+            <div class="chu"><%= ad[i].pb %></div>
+          </a>
+        </div>
+        <% }; %>
+        
+      
+
+      </div>
+    
+  </div>
+  <script type="text/javascript" src="/javascripts/script.js"></script>
+</body>
+
+</html>

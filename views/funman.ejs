@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Add icon library -->
+
+<title>BUS</title>
+<link rel="icon" href="https://f7.photo.talk.zdn.vn/3479841544823599640/2a92bfa52aabdff586ba.jpg">
+<link rel="stylesheet" href="/stylesheets/style.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+<body>
+
+<div class="navbar">
+    <div class="">
+      <a href="/post">Trang chủ</a>
+    </div>
+    <div >
+      <a href="" class="funpage">Trang quản lý phòng ban</a>
+    </div>
+    <div class="">
+      <a href="/auth/logout">Đăng xuất</a>
+    </div>    
+</div>
+
+
+<div class="depart-mana">
+  
+
+    <% for (var i =0; i < data.length;  i++ ) {%>
+    <div class="funman" id="pb<%= data[i]._id %>">
+      <a href="">
+        <span class="fun-name">
+          <%=data[i].pb %>
+        </span>
+        <span><a class="btn-delete" data-id="<%=data[i]._id %>" data-pb="<%=data[i].pb %>"><i  class="fa fa-trash-o"></i></a></span>
+      </a>
+    </div>
+    <% } %>
+    
+
+    <div class="add-funman">
+      <a href="/auth/register">
+        <span class="fun-name">
+          Thêm phòng ban  &nbsp;&nbsp;<i class="fa fa-plus-circle"></i>
+        </span>
+      </a>
+    </div>
+
+</div>
+<script type="text/javascript" src="/javascripts/script.js"></script>
+</body>
+</html>

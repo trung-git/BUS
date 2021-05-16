@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+    <title>BUS</title>
+    <link rel="icon" href="https://f7.photo.talk.zdn.vn/3479841544823599640/2a92bfa52aabdff586ba.jpg">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- <style>
+        #alert {
+            display: none;
+        }
+        
+        .container {
+            width: 500px;
+            margin-top: 50px;
+        }
+    </style> -->
+</head>
+
+<body>
+    <div class="container">
+        <form>
+            <h1>Change password</h1>
+            <div class="form-group">
+                <label for="password">Current password</label>
+                <input type="password" onfocus="clearAlert()" class="form-control" name="password" id="password" placeholder="Current password">
+            </div>
+            <div class="form-group">
+                <label for="re-password">New password</label>
+                <input type="password" onfocus="clearAlert()" class="form-control" name="re-password" id="re-password" placeholder="New password">
+            </div>
+            <div id="alert" class="alert alert-danger" role="alert">
+                This is a danger alert—check it out!
+            </div>
+            <button type="submit" id="btn-savepass" class="btn btn-primary">Save</button>
+        </form>
+    </div>
+    <!-- <script>
+        function clearAlert() {
+            $("#alert").hide()
+        }
+        $("#btn-savepass").click(event => {
+            event.preventDefault()
+
+            let password = $("#password").val()
+            let repassword = $("#re-password").val()
+
+            let message = ""
+            if (password === "") {
+                message = "Password không được để trống "
+            } else if (repassword === "") {
+                message = "Confirm password không được để trống "
+            } else if (password.length < 6 || repassword.length < 6) {
+                message = "Password phải từ 6 ký tự trở lên"
+            } else if (password === repassword) {
+                message = "Bạn đang nhập mật khẩu cũ"
+            }
+
+            if (message.length != 0) {
+
+                $("#alert").html(message)
+                $("#alert").show()
+            } else {
+                let data = {
+                    oldpass: password,
+                    newpass: repassword
+                }
+                fetch(`http://localhost:3000/auth/change/password`, {
+                        method: "POST",
+                        body: JSON.stringify(data),
+                        headers: {
+                            "Content-type": "application/json; charset=UTF-8"
+                        }
+                    })
+                    .then(response => {
+                        return response.json()
+                    })
+                    .then(result => {
+                        console.log('Success:', result);
+                        if (result.code === 0) {
+                            window.location.href = "/auth/pb"
+                        } else {
+                            $("#alert").html(result.message)
+                            $("#alert").show()
+                        }
+
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    })
+
+            }
+
+
+
+
+
+        })
+    </script> -->
+    <script type="text/javascript" src="/javascripts/script.js"></script>
+</body>
+
+</html>

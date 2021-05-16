@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>BUS</title>
+    <link rel="icon" href="https://f7.photo.talk.zdn.vn/3479841544823599640/2a92bfa52aabdff586ba.jpg">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- <style>
+        #alert {
+            display: none;
+        }
+        
+        .container {
+            width: 500px;
+            margin-top: 50px;
+        }
+    </style> -->
+</head>
+
+<body>
+    <div class="container">
+        <a href="/auth/quanly"><button>Back</button> </a>
+        <form>
+            <h1>Register</h1>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" onfocus="clearAlert()" class="form-control" name="username" id="username" placeholder="Enter username">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" onfocus="clearAlert()" class="form-control" name="password" id="password" placeholder="Password">
+            </div>
+            <div class="form-group">
+                <label for="re-password">Confirm password</label>
+                <input type="password" onfocus="clearAlert()" class="form-control" name="re-password" id="re-password" placeholder="Password">
+            </div>
+            <div class="form-group">
+                <label for="department">Department</label>
+                <select onfocus="clearAlert()" class="form-control" id="department"> 
+                    <option>Phòng CTHSSV</option>
+                    <option>Phòng Đại học</option>
+                    <option>Phòng Sau đại học</option>
+                    <option>Phòng điện toán và máy tính</option>
+                    <option>Phòng tài chính</option>
+                    <option>Phòng khảo thí và KDCL</option>
+                    <option>TDT Creative Language Center</option>
+                    <option>Trung tâm tin học</option>
+                    <option>ATEM</option>
+                    <option>SDTD</option>
+                    <option>Trung tâm hợp tác doanh nghiệp và cựu sinh viên</option>
+                    <option>Trung tâm ngoại ngữ - tin học - bồi dưỡng tin học</option>
+                    <option>Viện chính sách kinh tế và kinh doanh</option>
+                    <option>Khoa mỹ thuật công nghiệp</option>
+                    <option>Khoa Điện - Điện tử</option>
+                    <option>Khoa Công nghệ thông tin</option>
+                    <option>Khoa Quản trị kinh doanh</option>
+                    <option>Khoa Môi trường và bảo hộ lao động</option>
+                    <option>Khoa Lao động công đoàn</option>
+                    <option>Khoa Tài chính ngân hàng</option>
+                    <option>Khoa Giáo dục quốc tế</option>
+                </select>
+            </div>
+            <div id="alert" class="alert alert-danger" role="alert">
+                This is a danger alert—check it out!
+            </div>
+            <button type="submit" id="btn" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+    <!-- <script>
+        function clearAlert() {
+            $("#alert").hide()
+        }
+        $("#btn").click(event => {
+            event.preventDefault()
+            let username = $("#username").val()
+            let password = $("#password").val()
+            let repassword = $("#re-password").val()
+            let pb = $("#department").val()
+            let message = ""
+            if (username === "") {
+                message = "Username không được để trống "
+            } else if (password === "") {
+                message = "Password không được để trống "
+            } else if (password.length < 6) {
+                message = "Password phải từ 6 ký tự trở lên"
+            } else if (repassword === "") {
+                message = "Confirm password không được để trống "
+            } else if (password !== repassword) {
+                message = "Password không trùng khớp"
+            }
+
+            if (message.length != 0) {
+
+                $("#alert").html(message)
+                $("#alert").show()
+            } else {
+                let data = {
+                    username: username,
+                    password: password,
+                    pb: pb
+                }
+                fetch(`http://localhost:3000/auth/register`, {
+                        method: "POST",
+                        body: JSON.stringify(data),
+                        headers: {
+                            "Content-type": "application/json; charset=UTF-8"
+                        }
+                    })
+                    .then(response => {
+                        return response.json()
+                    })
+                    .then(result => {
+                        console.log('Success:', result);
+                        if (result.code === 0) {
+                            window.location.href = "/auth/quanly"
+                        } else {
+                            $("#alert").html(result.message)
+                            $("#alert").show()
+                        }
+
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    })
+
+            }
+        })
+    </script> -->
+    <script type="text/javascript" src="/javascripts/script.js"></script>
+</body>
+
+</html>

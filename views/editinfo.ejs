@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>BUS</title>
+    <link rel="icon" href="https://f7.photo.talk.zdn.vn/3479841544823599640/2a92bfa52aabdff586ba.jpg">
+
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+<body>
+
+    <div>
+        <div class="sidenav">
+            <div>
+                <div>
+                    <a class="itemleft" href="/auth/y">
+                        <table>
+                            <tr>
+                                <td>
+                                    <img class="avt-mini" src="<%=student.img %>">
+                                </td>
+                                <td>
+                                    <%=student.name %>
+                                </td>
+                            </tr>
+                        </table>
+                    </a>
+                </div>
+                <div>
+                    <a class="itemleft" href="/post"><i class="fa fa-home" aria-hidden="true"></i> Trang Chủ </a>
+                </div>
+                <div>
+                    <a class="itemleft" href="/noti/pb"><i class="fa fa-server" aria-hidden="true"></i> Phòng Ban </a>
+                </div>
+                <div>
+                    <a class="itemleft" href="/post/sinhvien"><i class="fa fa-user" aria-hidden="true"></i> Sinh viên </a>
+                </div>
+
+                <div>
+                    <a class="itemleft" href="/auth/logout"><i class=" fa fa-sign-out " aria-hidden="true "></i> Đăng xuất </a>
+                </div>
+
+
+            </div>
+        </div>
+
+        <div class="navbar ">
+            <div class="homepage ">
+                <b>THÔNG BÁO</b>
+            </div>
+
+
+        </div>
+
+
+
+
+        <div class="main ">
+
+            <div class="wall ">
+                <table>
+                    <tr class=" ">
+
+
+                        <td class="avt-wall ">
+                            <img class="avt-wall " src="<%=student.img %>">
+                        </td>
+
+                        <td class="myName">
+                            <%=student.name %>
+                        </td>
+
+                    </tr>
+
+                    <tr class="maininfor">
+                        <td>Mã Số Sinh Viên: </td>
+                        <td>
+                            <%=student.mssv %>
+                        </td>
+                    </tr>
+
+                    <tr class="maininfor">
+                        <td>Email: </td>
+                        <td>
+                            <%=student.email %>
+                        </td>
+                    </tr>
+
+                    <tr class="maininfor">
+                        <td>Tên hiển thị: </td>
+                        <td><input type="text" id="name" class="editchange" name="name" value="<%= student.name %>"></td>
+                    </tr>
+                    <tr class="maininfor">
+                        <td>Khoa: </td>
+                        <td><input type="text" id="khoa" class="editchange" name="khoa" value="<%= student.khoa %>"></td>
+                    </tr>
+                    <tr class="maininfor">
+                        <td>Lớp: </td>
+                        <td><input type="text" id="class" class="editchange" name="class" value="<%=student.lop %>"></td>
+                    </tr>
+
+                    <tr class="maininfor">
+                        <td colspan="2" class="infor-change"><a class="done-btn" id="submit" href="#" data-mssv="<%= student.mssv %>">Hoàn tất </a></td>
+                    </tr>
+
+                </table>
+            </div>
+
+
+
+        </div>
+        <!-- <script>
+            $('#submit').click(function(event) {
+                event.preventDefault();
+                const mssv = $("#submit").attr("data-mssv")
+                console.log(mssv);
+                let data = {
+                    name: $("#name").val(),
+                    khoa: $("#khoa").val(),
+                    lop: $("#class").val() || ""
+                }
+                fetch(`/auth/update/student/${mssv}`, {
+                        method: "PUT",
+                        body: JSON.stringify(data),
+                        headers: {
+                            "Content-type": "application/json; charset=UTF-8"
+                        }
+                    })
+                    .then(response => {
+                        return response.json()
+                    })
+                    .then(result => {
+                        console.log('Success:', result);
+                        if (result.code === 0) {
+                            window.location.href = "/auth/y"
+                        }
+
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    })
+
+
+            });
+        </script> -->
+        <script type="text/javascript" src="/javascripts/script.js"></script>
+</body>
+
+</html>

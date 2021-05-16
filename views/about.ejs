@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>BUS</title>
+    <link rel="icon" href="https://f7.photo.talk.zdn.vn/3479841544823599640/2a92bfa52aabdff586ba.jpg">
+
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+<body>
+
+
+    <div>
+        <div class="sidenav">
+            <div>
+                <div>
+                    <a class="itemleft" href="/auth/y">
+                        <table>
+                            <tr>
+                                <td>
+                                    <img class="avt-mini" src="<%=student.img %>">
+                                </td>
+                                <td>
+                                    <%= student.name %>
+                                </td>
+                            </tr>
+                        </table>
+                    </a>
+                </div>
+
+
+                <div>
+                    <a class="itemleft" href="/post"><i class="fa fa-home" aria-hidden="true"></i> Trang Chủ </a>
+                </div>
+                <div>
+                    <a class="itemleft" href="/noti/pb"><i class="fa fa-server" aria-hidden="true"></i> Phòng Ban </a>
+                </div>
+                <div>
+                    <a class="itemleft" href="/post/sinhvien"><i class="fa fa-user" aria-hidden="true"></i> Sinh viên </a>
+                </div>
+
+                <div>
+                    <a class="itemleft" href="/auth/logout"><i class="fa fa-sign-out" aria-hidden="true"></i> Đăng xuất </a>
+                </div>
+
+
+            </div>
+        </div>
+
+        <div class="navbar">
+            <div class="homepage">
+                <b>THÔNG BÁO</b>
+            </div>
+        </div>
+
+        <div class="main">
+
+            <div class="wall">
+                <table>
+
+
+                    <tr class="">
+
+
+                        <td class="avt-wall">
+                            <img class="avt-wall" src="<%=student.img %>">
+                        </td>
+
+                        <td class="myName">
+                            <%= student.name %>
+                        </td>
+
+                    </tr>
+
+                    <tr class="maininfor">
+                        <td>Mã Số Sinh Viên: </td>
+                        <td>
+                            <%= student.mssv %>
+                        </td>
+                    </tr>
+
+                    <tr class="maininfor">
+                        <td>Email: </td>
+                        <td>
+                            <%= student.email %>
+                        </td>
+                    </tr>
+
+                    <tr class="maininfor">
+                        <td>Khoa: </td>
+                        <td>
+                            <%= student.khoa %>
+                        </td>
+                    </tr>
+                    <tr class="maininfor">
+                        <td>Lớp: </td>
+                        <td>
+                            <%= student.lop %>
+                        </td>
+                    </tr>
+
+                    <tr class="maininfor">
+                        <td colspan="2" class="infor-change"><a href="/auth/edit">Chỉnh sửa thông tin <i class="fa fa-edit"></i></a></td>
+                    </tr>
+
+                </table>
+            </div>
+            <div class="feed-point">
+                Bài viết <i class="fa fa-newspaper-o" aria-hidden="true"></i>
+            </div>
+            <div class="newfeed">
+                <% for (var i = 0; i < post.length ; i++){ %>
+                    <div class="newpost" id="<%= post[i].id %>">
+                        <table class="singlepost">
+
+                            <tr class="title">
+
+                                <td rowspan="2" class="avt-feed">
+                                    <img class="avt-feed-mini" src="<%= post[i].userimg %>">
+                                </td>
+
+                                <td class="username-feed"><b><%= post[i].name %></b></td>
+                                
+                                    
+                            </tr>
+
+                            <tr>
+                                <td class="time-feed">
+                                    <%= post[i].createdAt.getDate() %>-<%= post[i].createdAt.getMonth() + 1 %>-<%= post[i].createdAt.getFullYear() %> , <%= post[i].createdAt.getHours() %>:<%= post[i].createdAt.getMinutes() %>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="3" class="cap-feed">
+                                    <pre id="desc<%= post[i].id %>" ><%= post[i].desc %></pre>
+                                </td>
+                            </tr>
+                            <% if (post[i].video){ %>
+                                <tr>
+                                    <td colspan="2" class="feed-img">
+                                      <iframe class="img-from-feed" width="1463" height="600" src="<%= post[i].video%>?autoplay=0&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    </td>
+                                </tr>
+                            <% }; %>
+
+
+                            <tr>
+                                <td colspan="3">
+                                    <table style="width: 100%">
+                                        
+                                        <td class="feed-but">
+                                            <button id="btnlike<%= post[i].id %>" data-userid = "<%= post[i].userId %>" class="feed-button-like" ><b>❤ Thích</b></button>
+                                        </td>
+
+                                        <td>
+                                            <button class="feed-button-cmt" id="<%= post[i].id %>" onclick="showcmt(this)"><b>🗨 Bình luận</b></button>
+                                        </td>
+                                        <% if(post[i].like.includes(post[i].userId)) { %>
+                                        <script>
+                                            
+                                            
+                                            document.getElementById("btnlike<%= post[i].id %>").style.background = "rgb(53, 120, 229)";
+                                            document.getElementById("btnlike<%= post[i].id %>").style.color = "white";
+                                            
+                                        </script>
+                                        <% } else { %>
+                                        <script>
+                                            
+                                            
+                                            document.getElementById("btnlike<%= post[i].id %>").style.background = "white";
+		                                    document.getElementById("btnlike<%= post[i].id %>").style.color = "black";
+                                        </script>
+                                        <% }; %>
+                                    </table>
+                                </td>
+                            </tr>
+
+                            <tr class="cmt-count">
+                                <td colspan="3">
+                                    <table style="width: 100%">
+                                        <td class="feed-sta">
+                                            <div class="like-count-num">
+                                                <span id="count-like"><span id="count<%= post[i].id %>"><%= post[i].like.length %></span></span>
+                                                <span>Likes</span>
+                                                
+                                                <span><span id="count-cmt<%= post[i].id %>"><%= post[i].cmt.length %></span> Comments</span>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <button class="hide-cmt" id="hidebutton<%= post[i].id %>" onclick="hiding(this)">Không hiện bình luận</button>
+                                        </td>
+                                    </table>
+                                </td>
+                            </tr>
+                            
+                            <tr class="allcmt" id="cmtlist<%= post[i].id %>">
+                                <td colspan="3" class="cmt-feed">
+
+                                    <div class="all-comment" id="all-comment<%= post[i].id %>">
+
+                                        
+                                        <% if(post[i].cmt.length > 0){%>
+                                            <% for(var j = 0 ; j < post[i].cmt.length ; j++) { %>
+                                        <div class="singlecmt" id="singlecmt<%= post[i].cmt[j]._id %>">
+                                            <table>
+                                                <tr class="title">
+                                                    <td rowspan="2" class="avt-feed">
+                                                        <img class="avt-feed-mini" src="<%= post[i].cmt[j].userimg %>">
+                                                    </td>
+
+                                                    <td class="username-cmt"><b><%= post[i].cmt[j].username %></b></td>
+                                                    <%if(post[i].userId.toString() === post[i].cmt[j].userId.toString()) {%>
+                                                    <td rowspan="2" class="avt-feed">
+                                                        <span><i class="btndelcmt fa fa-trash-o" id="btndelcmt<%= post[i].id %>" data-id1="<%= post[i].cmt[j]._id %>"></i></span>
+                                                    </td>
+                                                    <% }; %>
+                                                </tr>
+
+                                                <tr>
+                                                    <td class="comment-cmt"><%= post[i].cmt[j].desc_cmt %></td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                            <% }; %>
+                                        <% }; %>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            
+
+                        </table>
+                    </div>
+                    <!-- Ket thuc bai viet -->
+                    <% }; %>
+
+
+            </div>
+
+        </div>
+        <script type="text/javascript" src="/javascripts/script.js"></script>
+</body>
+
+</html>
